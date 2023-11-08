@@ -55,3 +55,7 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('web.login'))
     return render_template('register.html', title='Register', form=form)
+
+@web.route('/tools', methods=['GET'])
+def tools():
+    return render_template('tools.html')
