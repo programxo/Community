@@ -37,9 +37,12 @@ def login():
 @web.route('/logout')
 def logout():
     logout_user()
-    response = make_response("Logging out...")
-    response.set_cookie('session', '', expires=0, path='/')
-    session.clear()
+    
+    #WIP Causing Problems
+    #response = make_response("Logging out...")
+    #response.set_cookie('session', '', expires=0, path='/')
+    #session.clear()
+    
     return redirect(url_for('web.login'))
 
 @web.route('/register', methods=['GET', 'POST'])
