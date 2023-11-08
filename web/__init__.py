@@ -5,6 +5,7 @@ from web.routes import web
 from domain.models import User
 from config import Config
 from infrastructure.database import db
+from flask_migrate import Migrate
 from flask_login import LoginManager
 
 def create_app():
@@ -14,7 +15,8 @@ def create_app():
     app.config.from_object(Config)
     
     db.init_app(app)
-
+    migrate = Migrate(app, db)
+        
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'web.login'
@@ -25,6 +27,5 @@ def create_app():
     
     with app.app_context():
         from . import routes  # Import routes
-        db.create_all()  # Create database tables for our data models
     
     return app
