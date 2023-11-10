@@ -4,7 +4,7 @@ from flask import Flask
 from web.routes import web
 from domain.models import User
 from config import Config
-from infrastructure.database import db
+from infrastructure.database import db, migrate
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
@@ -27,5 +27,5 @@ def create_app():
     
     with app.app_context():
         from . import routes  # Import routes
-    
+        
     return app
