@@ -66,5 +66,5 @@ def new_idea():
         idea = Idea(content=form.content.data, user_id=current_user.id)
         db.session.add(idea)
         db.session.commit()
-        return redirect(url_for('web.idea'))  # Oder eine andere Zielseite
-    return render_template('idea.html', title='Neue Idee', form=form)
+        return redirect(url_for('web.home'))  # Oder eine andere Zielseite
+    return render_template('idea.html', title='New Idea', form=form)
