@@ -7,7 +7,10 @@ from domain.models import User, Idea
 from infrastructure.database import db
 from web.forms import LoginForm, RegistrationForm, IdeaForm
 
-from flask import Blueprint
+from flask import Blueprint, request, jsonify
+from config import Config
+from openai import OpenAI
+client = OpenAI(api_key=Config.OPENAI_API_KEY)
 
 web = Blueprint('web', __name__)
 
@@ -68,3 +71,19 @@ def new_idea():
         db.session.commit()
         return redirect(url_for('web.idea'))  # Oder eine andere Zielseite
     return render_template('idea.html', title='Neue Idee', form=form)
+
+@web.route('/send_message', methods=['POST'])
+def send_message():
+    user_message = request.json['message']
+
+    response = client.chat.completions.create(
+        model="gpt-4-1106-preview",
+        messages=[{"role": "user", "content": user_message}]
+    )
+    reply_content = response.choices[0].message.content
+    return jsonify(reply=reply_content) 
+
+@web.route('/chat')
+@login_required
+def chat():
+    return render_template('chat.html', title='Chat')
