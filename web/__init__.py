@@ -4,6 +4,7 @@ from flask import Flask
 from web.routes import web
 from domain.models import User
 from config import Config
+import openai
 from infrastructure.database import db, migrate
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -13,6 +14,8 @@ def create_app():
     app.register_blueprint(web, url_prefix='/')
     
     app.config.from_object(Config)
+    
+    openai.api_key = app.config['OPENAI_API_KEY']
     
     db.init_app(app)
     migrate = Migrate(app, db)
