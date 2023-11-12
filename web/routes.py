@@ -63,6 +63,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @web.route('/idea', methods=['GET', 'POST'])
 def new_idea():
     form = IdeaForm()
@@ -93,3 +94,8 @@ def chat():
 def tools():
     return render_template('tools.html')
 >>>>>>> dc582da (Add Tools Page and Register in Routes)
+=======
+@web.route('/tools', methods=['GET'])
+def tools():
+    return render_template('tools.html')
+>>>>>>> dc582daaa68966d909a20279fb6ae6f973bb6f67
