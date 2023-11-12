@@ -62,6 +62,8 @@ def register():
         return redirect(url_for('web.login'))
     return render_template('register.html', title='Register', form=form)
 
+
+
 @web.route('/idea', methods=['GET', 'POST'])
 def new_idea():
     form = IdeaForm()
@@ -92,6 +94,13 @@ def chat():
 def tools():
     return render_template('tools.html')
 
+<<<<<<< HEAD
+
+@web.route('/tools', methods=['GET'])
+def tools():
+    return render_template('tools.html')
+
+=======
 # Add these imports to web/routes.py
 from web.forms import MemberForm
 from domain.models import Member
@@ -113,3 +122,4 @@ def member_list():
         return redirect(url_for('web.member_list'))
     members = Member.query.all()
     return render_template('member_list.html', form=form, members=members )
+>>>>>>> 358e7184dc5a7ab1392d9fa2451937b256667f6a
