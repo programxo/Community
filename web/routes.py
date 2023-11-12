@@ -88,6 +88,10 @@ def send_message():
 def chat():
     return render_template('chat.html', title='Chat')
 
+@web.route('/tools', methods=['GET'])
+def tools():
+    return render_template('tools.html')
+
 # Add these imports to web/routes.py
 from web.forms import MemberForm
 from domain.models import Member
