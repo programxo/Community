@@ -62,8 +62,6 @@ def register():
         return redirect(url_for('web.login'))
     return render_template('register.html', title='Register', form=form)
 
-
-
 @web.route('/idea', methods=['GET', 'POST'])
 def new_idea():
     form = IdeaForm()
@@ -89,10 +87,6 @@ def send_message():
 @login_required
 def chat():
     return render_template('chat.html', title='Chat')
-
-@web.route('/tools', methods=['GET'])
-def tools():
-    return render_template('tools.html')
 
 @web.route('/tools', methods=['GET'])
 def tools():
