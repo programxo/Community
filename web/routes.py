@@ -87,7 +87,3 @@ def send_message():
 @login_required
 def chat():
     return render_template('chat.html', title='Chat')
-
-@web.route('/tools', methods=['GET'])
-def tools():
-    return render_template('tools.html')
