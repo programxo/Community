@@ -77,7 +77,7 @@ def send_message():
     user_message = request.json['message']
 
     response = client.chat.completions.create(
-        model="gpt-4-1106-preview",
+        model="gpt-3.5-turbo-0613",
         messages=[{"role": "user", "content": user_message}]
     )
     reply_content = response.choices[0].message.content

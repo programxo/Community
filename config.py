@@ -2,6 +2,7 @@
 
 import os
 from datetime import timedelta
+from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -11,4 +12,5 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+    load_dotenv()
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
