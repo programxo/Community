@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Members</h2>
+
+    <!-- Member Adding Form -->
+    <div class="mb-4">
+        <form method="post" class="mb-3">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.function.label(class="form-label") }}
+                {{ form.function(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.experience_level.label(class="form-label") }}
+                {{ form.experience_level(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.phone_number.label(class="form-label") }}
+                {{ form.phone_number(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+    <!-- Members List Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Function</th>
+                <th>Experience Level</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.function }}</td>
+                <td>{{ member.experience_level }}</td>
+                <td>{{ member.phone_number }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
