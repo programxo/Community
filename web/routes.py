@@ -87,3 +87,30 @@ def send_message():
 @login_required
 def chat():
     return render_template('chat.html', title='Chat')
+
+
+@web.route('/tools', methods=['GET'])
+def tools():
+    return render_template('tools.html')
+
+# Add these imports to web/routes.py
+from web.forms import MemberForm
+from domain.models import Member
+
+@web.route('/members', methods=['GET', 'POST'])
+@login_required
+def member_list():
+    form = MemberForm()
+    if form.validate_on_submit():
+        member = Member(
+            name=form.name.data,
+            function=form.function.data,
+            experience_level=form.experience_level.data,
+            phone_number=form.phone_number.data
+        )
+        db.session.add(member)
+        db.session.commit()
+        flash('Member added successfully!')
+        return redirect(url_for('web.member_list'))
+    members = Member.query.all()
+    return render_template('member_list.html', form=form, members=members )

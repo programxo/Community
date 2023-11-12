@@ -32,3 +32,14 @@ class RegistrationForm(FlaskForm):
 class IdeaForm(FlaskForm):
     content = TextAreaField('Idea', validators=[DataRequired()])
     submit = SubmitField('Submit idea')
+    
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
+class MemberForm(FlaskForm):
+    name = StringField('Name')
+    function = StringField('Function')
+    experience_level = StringField('Experience Level')
+    phone_number = StringField('Phone Number')
+    submit = SubmitField('Save')
