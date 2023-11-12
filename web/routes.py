@@ -62,8 +62,8 @@ def register():
         return redirect(url_for('web.login'))
     return render_template('register.html', title='Register', form=form)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 @web.route('/idea', methods=['GET', 'POST'])
 def new_idea():
     form = IdeaForm()
@@ -89,13 +89,13 @@ def send_message():
 @login_required
 def chat():
     return render_template('chat.html', title='Chat')
-=======
+
 @web.route('/tools', methods=['GET'])
 def tools():
     return render_template('tools.html')
->>>>>>> dc582da (Add Tools Page and Register in Routes)
-=======
+
+
 @web.route('/tools', methods=['GET'])
 def tools():
     return render_template('tools.html')
->>>>>>> dc582daaa68966d909a20279fb6ae6f973bb6f67
+
