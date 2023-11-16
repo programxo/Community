@@ -34,3 +34,12 @@ class Member(db.Model):
     function = db.Column(db.String(100))
     experience_level = db.Column(db.String(50))
     phone_number = db.Column(db.String(20))
+    
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.String(255))
+
+    def __repr__(self):
+        return f'<Project {self.name}>'
