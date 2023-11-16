@@ -1,3 +1,4 @@
+<!-- base.html - Base Layout -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('web.projects') }}"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('web.chat') }}"><i class="fa-solid fa-comment-dots"></i></i> AI Chat</a>
                         </li>
