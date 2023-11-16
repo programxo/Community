@@ -123,11 +123,11 @@ def projects():
     projects = Project.query.all()
     return render_template('projects.html', projects=projects)
 
-@web.route('/project/<int:project_id>')
+@web.route('/project/<string:project_name>')
 @login_required
-def start_project(project_id):
-    project = Project.query.get_or_404(project_id)
-    template_name = f"projects/{project_id}.html"
+def start_project(project_name):
+    project = Project.query.filter_by(name=project_name).first_or_404()
+    template_name = f"projects/{project.name}.html"
     return render_template(template_name, project=project)
 
 @web.route('/create_project', methods=['GET', 'POST'])

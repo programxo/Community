@@ -25,7 +25,7 @@ Projects
                     <p class="card-text">{{ project.description|truncate(120) }}</p>
                 </div>
                 <div class="card-footer bg-white">
-                    <a href="{{ url_for('web.start_project', project_id=project.id) }}" class="btn btn-primary stretched-link">Start Project</a>
+                    <a href="{{ url_for('web.start_project', project_name=project.name) }}" class="btn btn-primary stretched-link">Start Project</a>
                 </div>
             </div>
         </div>
