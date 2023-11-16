@@ -3,9 +3,9 @@
 from flask import render_template, flash, redirect, url_for, request, session, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from urllib.parse import urlparse
-from domain.models import User, Idea
+from domain.models import Project, User, Idea
 from infrastructure.database import db
-from web.forms import LoginForm, RegistrationForm, IdeaForm
+from web.forms import LoginForm, ProjectForm, RegistrationForm, IdeaForm
 
 from flask import Blueprint, request, jsonify
 from config import Config
@@ -38,6 +38,7 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 @web.route('/logout')
+@login_required
 def logout():
     logout_user()
     
@@ -63,6 +64,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @web.route('/idea', methods=['GET', 'POST'])
+@login_required
 def new_idea():
     form = IdeaForm()
     if form.validate_on_submit():
@@ -73,6 +75,7 @@ def new_idea():
     return render_template('idea.html', title='New Idea', form=form)
 
 @web.route('/send_message', methods=['POST'])
+@login_required
 def send_message():
     user_message = request.json['message']
 
@@ -113,3 +116,32 @@ def member_list():
         return redirect(url_for('web.member_list'))
     members = Member.query.all()
     return render_template('member_list.html', form=form, members=members )
+
+@web.route('/projects', methods=['GET'])
+@login_required
+def projects():
+    projects = Project.query.all()
+    return render_template('projects.html', projects=projects)
+
+@web.route('/project/<int:project_id>')
+@login_required
+def start_project(project_id):
+    project = Project.query.get_or_404(project_id)
+    template_name = f"projects/{project_id}.html"
+    return render_template(template_name, project=project)
+
+@web.route('/create_project', methods=['GET', 'POST'])
+@login_required
+def create_project():
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project = Project(
+            name=form.name.data,
+            description=form.description.data,
+            image_url=form.image_url.data
+        )
+        db.session.add(project)
+        db.session.commit()
+        flash('Your project has been created!', 'success')
+        return redirect(url_for('web.projects'))
+    return render_template('create_project.html', title='Create Project', form=form)
