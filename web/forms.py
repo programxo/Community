@@ -1,7 +1,7 @@
 # app/web/forms.py
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import FileField, StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from domain.models import User
 
@@ -43,3 +43,9 @@ class MemberForm(FlaskForm):
     experience_level = StringField('Experience Level')
     phone_number = StringField('Phone Number')
     submit = SubmitField('Save')
+    
+class ProjectForm(FlaskForm):
+    name = StringField('Project Name', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    image_url = FileField('Image URL')
+    submit = SubmitField('Create Project')
