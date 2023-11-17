@@ -26,6 +26,7 @@ Projects
                 </div>
                 <div class="card-footer bg-white">
                     <a href="{{ url_for('web.start_project', project_name=project.name) }}" class="btn btn-primary stretched-link">Start Project</a>
+                    <a href="{{ url_for('web.edit_project', project_name=project.name) }}" class="btn btn-secondary stretched-link">Edit Project</a>
                 </div>
             </div>
         </div>

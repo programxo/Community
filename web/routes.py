@@ -145,3 +145,25 @@ def create_project():
         flash('Your project has been created!', 'success')
         return redirect(url_for('web.projects'))
     return render_template('create_project.html', title='Create Project', form=form)
+
+@web.route('/edit_project/<string:project_name>', methods=['GET', 'POST'])
+@login_required
+def edit_project(project_name):
+    project = Project.query.filter_by(name=project_name).first_or_404()
+    form = ProjectForm()
+
+    if form.validate_on_submit():
+        project.name = form.name.data
+        project.description = form.description.data
+        project.image_url = form.image_url.data
+        db.session.commit()
+        flash('Project updated successfully!', 'success')
+        return redirect(url_for('web.projects'))
+
+    elif request.method == 'GET':
+        form.name.data = project.name
+        form.description.data = project.description
+        form.image_url.data = project.image_url
+
+    return render_template('edit_project.html', title='Edit Project', form=form, project=project)
+
